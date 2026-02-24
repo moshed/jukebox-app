@@ -7,6 +7,63 @@
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@700,800,900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
+   PASSWORD GATE
+   ============================================================ */
+.pw-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0a0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'General Sans', sans-serif;
+}
+.pw-gate.hidden { display: none; }
+.pw-box {
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  padding: 2rem;
+}
+.pw-box h2 {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #f0f0f5;
+  margin-bottom: 0.5rem;
+}
+.pw-box p {
+  color: #8888a0;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.pw-box input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: #12121a;
+  color: #f0f0f5;
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.pw-box input:focus { border-color: #8B5CF6; }
+.pw-box input.error {
+  border-color: #ef4444;
+  animation: shake 0.4s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+</style>
+<style>
+/* ============================================================
    BASE / RESET
    ============================================================ */
 *, *::before, *::after {
@@ -905,6 +962,40 @@ section {
 </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div class="pw-gate" id="pwGate">
+  <div class="pw-box">
+    <h2>Password Required</h2>
+    <p>Enter the password to view this presentation.</p>
+    <input type="password" id="pwInput" placeholder="Enter password" autocomplete="off" autofocus>
+  </div>
+</div>
+<script>
+(function(){
+  const HASH = 'aea0a0380501c82cff8a5067802804a250c11a388c30c24f4aacaa2999c31ae9';
+  const KEY = 'jukebox_auth';
+  if (sessionStorage.getItem(KEY) === HASH) {
+    document.getElementById('pwGate').classList.add('hidden');
+  } else {
+    document.body.style.overflow = 'hidden';
+  }
+  document.getElementById('pwInput').addEventListener('keydown', async function(e) {
+    if (e.key !== 'Enter') return;
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(this.value));
+    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    if (hash === HASH) {
+      sessionStorage.setItem(KEY, HASH);
+      document.getElementById('pwGate').classList.add('hidden');
+      document.body.style.overflow = '';
+    } else {
+      this.classList.add('error');
+      this.value = '';
+      setTimeout(() => this.classList.remove('error'), 500);
+    }
+  });
+})();
+</script>
 
 <!-- ============================================================
      1. HERO
