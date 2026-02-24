@@ -205,6 +205,15 @@ section {
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badge-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
 }
 
 /* Hero phone mockups */
@@ -349,6 +358,19 @@ section {
 .feature-indicator.triangle::after { background: transparent; border-left: 7px solid rgba(255,255,255,0.9); border-top: 6px solid transparent; border-bottom: 6px solid transparent; width: 0; height: 0; border-radius: 0; margin-left: 3px; }
 .feature-indicator.dots::after { width: 16px; height: 4px; border-radius: 2px; box-shadow: 0 6px 0 rgba(255,255,255,0.9); }
 
+.feature-badge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  object-fit: contain;
+}
+
+.feature-badge-icon.airplay-icon {
+  filter: invert(1);
+  border-radius: 8px;
+}
+
 .feature-title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -363,7 +385,141 @@ section {
 }
 
 /* ============================================================
-   4. ADAPTIVE THEMING
+   4. SYNCED LYRICS
+   ============================================================ */
+.lyrics-section {
+  text-align: center;
+}
+
+.lyrics-showcase {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.lyrics-phone-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lyrics-phone-wrapper .phone-frame {
+  width: clamp(140px, 20vw, 200px);
+}
+
+.lyrics-phone-wrapper.lyrics-phone-featured .phone-frame {
+  width: clamp(160px, 24vw, 240px);
+}
+
+.lyrics-caption {
+  margin-top: 0.75rem;
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.glow-purple { background: #8B5CF6; }
+.glow-dark { background: #6366f1; }
+
+@media (max-width: 768px) {
+  .lyrics-showcase {
+    gap: 1rem;
+  }
+
+  .lyrics-phone-wrapper .phone-frame {
+    width: 130px;
+  }
+
+  .lyrics-phone-wrapper.lyrics-phone-featured .phone-frame {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lyrics-phone-wrapper .phone-frame {
+    width: 100px;
+  }
+
+  .lyrics-phone-wrapper.lyrics-phone-featured .phone-frame {
+    width: 120px;
+  }
+}
+
+/* ============================================================
+   4b. SONG REQUESTS
+   ============================================================ */
+.requests-section {
+  text-align: left;
+}
+
+.requests-layout {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.requests-text {
+  flex: 1;
+}
+
+.requests-text .section-subtitle {
+  margin-bottom: 1.5rem;
+}
+
+.requests-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.requests-features li {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  color: var(--text-muted);
+  padding-left: 1.25rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.requests-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gradient);
+}
+
+.requests-phone .phone-frame {
+  width: clamp(180px, 22vw, 240px);
+}
+
+@media (max-width: 768px) {
+  .requests-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .requests-text .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .requests-features {
+    align-items: center;
+  }
+
+  .requests-features li {
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   5. ADAPTIVE THEMING
    ============================================================ */
 .theming {
   text-align: center;
@@ -418,6 +574,34 @@ section {
   text-align: center;
 }
 
+.platform-badges {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 0.35rem 1rem 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.platform-badge-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  object-fit: contain;
+}
+
+
 .carplay .section-subtitle {
   margin: 0 auto clamp(2rem, 4vw, 3rem);
 }
@@ -454,29 +638,78 @@ section {
   text-align: center;
 }
 
-.tags-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+.lifestyle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
 }
 
-.tag {
-  background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
-  padding: 0.6rem 1.5rem;
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.01em;
-  transition: border-color 0.3s ease, background 0.3s ease;
+.lifestyle-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
 }
 
-.tag:hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  background: rgba(139, 92, 246, 0.08);
+.lifestyle-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lifestyle-card:hover img {
+  transform: scale(1.05);
+}
+
+.lifestyle-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 15, 0.85) 0%, rgba(10, 10, 15, 0.1) 60%);
+  pointer-events: none;
+}
+
+.lifestyle-label {
+  position: absolute;
+  bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+  left: clamp(0.75rem, 1.5vw, 1.25rem);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  color: #fff;
+  z-index: 1;
+}
+
+.lifestyle-card.wide {
+  grid-column: span 2;
+  aspect-ratio: 2 / 1;
+}
+
+@media (max-width: 768px) {
+  .lifestyle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lifestyle-card.wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .lifestyle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lifestyle-card.wide {
+    grid-column: span 1;
+  }
+
+  .lifestyle-card {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 /* ============================================================
@@ -565,6 +798,52 @@ section {
   margin-bottom: 1rem;
 }
 
+.store-badges {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.store-badge {
+  display: inline-block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.85;
+}
+
+.store-badge:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.store-badge-disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.store-badge-disabled:hover {
+  transform: none;
+  opacity: 0.4;
+}
+
+.qr-section {
+  margin-bottom: 1.5rem;
+}
+
+.qr-code {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.qr-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
 .footer-note {
   font-size: clamp(0.8rem, 1.3vw, 0.9rem);
   color: var(--text-muted);
@@ -631,15 +910,15 @@ section {
      1. HERO
      ============================================================ -->
 <section class="hero">
-  <img src="assets/icon.png" alt="Jukebox App Icon" class="hero-icon reveal">
+  <img src="assets/icon-appstore.jpg" alt="Jukebox App Icon" class="hero-icon reveal">
   <h1 class="hero-title reveal">Jukebox</h1>
   <p class="hero-tagline reveal">Your guests pick the music.</p>
   <p class="hero-subtitle reveal">
     Host a session from your Apple Music or Spotify library, share a code, and let everyone vote on what plays next. The most popular songs rise to the top&nbsp;&mdash; it's democratic party music.
   </p>
   <div class="badges reveal">
-    <span class="badge">Apple Music</span>
-    <span class="badge">Spotify</span>
+    <span class="badge"><img src="assets/apple-music-icon.jpg" alt="Apple Music" class="badge-icon">Apple Music</span>
+    <span class="badge"><img src="assets/spotify-icon.jpg" alt="Spotify" class="badge-icon">Spotify</span>
   </div>
   <div class="hero-phones reveal">
     <div class="phone-frame">
@@ -710,7 +989,7 @@ section {
     <div class="feature-item reveal">
       <div class="feature-indicator diamond"></div>
       <h3 class="feature-title">Song Requests</h3>
-      <p class="feature-desc">Search the full Apple Music or Spotify catalog and request songs to add to the queue.</p>
+      <p class="feature-desc">Guests can search the full catalog and request songs. Hosts approve or auto-approve. Built-in explicit content filtering keeps it clean when needed.</p>
     </div>
     <div class="feature-item reveal">
       <div class="feature-indicator bar"></div>
@@ -718,9 +997,9 @@ section {
       <p class="feature-desc">Let guests vote to skip a song. If enough people agree, it moves on.</p>
     </div>
     <div class="feature-item reveal">
-      <div class="feature-indicator triangle"></div>
-      <h3 class="feature-title">CarPlay Compatible</h3>
-      <p class="feature-desc">Full CarPlay integration makes Jukebox great for road trips.</p>
+      <img src="assets/carplay-badge.svg" alt="CarPlay" class="feature-badge-icon">
+      <h3 class="feature-title">CarPlay &amp; Android Auto</h3>
+      <p class="feature-desc">Full CarPlay and Android Auto integration makes Jukebox perfect for road trips.</p>
     </div>
     <div class="feature-item reveal">
       <div class="feature-indicator ring"></div>
@@ -728,15 +1007,76 @@ section {
       <p class="feature-desc">Beautiful lyric display with swipe-to-seek. Every word, perfectly timed.</p>
     </div>
     <div class="feature-item reveal">
-      <div class="feature-indicator dots"></div>
+      <img src="assets/airplay-icon.svg" alt="AirPlay" class="feature-badge-icon airplay-icon">
       <h3 class="feature-title">AirPlay Support</h3>
       <p class="feature-desc">Stream to any AirPlay speaker or TV. Fill the room with the party's choices.</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="feature-indicator dots"></div>
+      <h3 class="feature-title">Explicit Content Filter</h3>
+      <p class="feature-desc">Toggle explicit song filtering on or off. Keep the playlist family-friendly for any venue.</p>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     4. ADAPTIVE THEMING
+     4. SYNCED LYRICS
+     ============================================================ -->
+<section class="lyrics-section">
+  <h2 class="section-heading reveal">Every Word, Perfectly Timed</h2>
+  <p class="section-subtitle reveal" style="margin: 0 auto clamp(2rem, 4vw, 3.5rem);">
+    Time-synced lyrics scroll in real time as the song plays. Swipe through lyrics to seek to any part of the song. Works with Apple Music and Spotify.
+  </p>
+  <div class="lyrics-showcase reveal">
+    <div class="lyrics-phone-wrapper">
+      <div class="glow glow-purple"></div>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2908.PNG" alt="Synced lyrics — K-Pop with Korean and English" loading="lazy">
+      </div>
+      <p class="lyrics-caption">Multilingual lyrics support</p>
+    </div>
+    <div class="lyrics-phone-wrapper lyrics-phone-featured">
+      <div class="glow glow-dark"></div>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2913.PNG" alt="Synced lyrics — My Immortal, Evanescence" loading="lazy">
+      </div>
+      <p class="lyrics-caption">Swipe to seek through lyrics</p>
+    </div>
+    <div class="lyrics-phone-wrapper">
+      <div class="glow glow-red"></div>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_3591.PNG" alt="Now Playing with synced lyrics" loading="lazy">
+      </div>
+      <p class="lyrics-caption">Adaptive color theming</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4b. SONG REQUESTS
+     ============================================================ -->
+<section class="requests-section">
+  <div class="requests-layout">
+    <div class="requests-text reveal">
+      <h2 class="section-heading">Song Requests</h2>
+      <p class="section-subtitle">Guests can search the full Apple Music or Spotify catalog and request songs to add to the queue. Hosts approve or auto-approve requests with a tap.</p>
+      <ul class="requests-features">
+        <li>Search millions of songs</li>
+        <li>Host approval or auto-approve</li>
+        <li>Explicit content filtering</li>
+        <li>Duplicate request prevention</li>
+      </ul>
+    </div>
+    <div class="requests-phone reveal">
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_3604.PNG" alt="Pending song requests with approve and reject" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. ADAPTIVE THEMING
      ============================================================ -->
 <section class="theming">
   <h2 class="section-heading reveal">Colors That Move With the Music</h2>
@@ -770,6 +1110,10 @@ section {
      5. CARPLAY
      ============================================================ -->
 <section class="carplay">
+  <div class="platform-badges reveal">
+    <span class="platform-badge"><img src="assets/carplay-badge.svg" alt="CarPlay" class="platform-badge-icon">CarPlay</span>
+    <span class="platform-badge"><img src="assets/android-auto-icon.png" alt="Android Auto" class="platform-badge-icon">Android Auto</span>
+  </div>
   <h2 class="section-heading reveal">On the Road</h2>
   <p class="section-subtitle reveal" style="margin: 0 auto clamp(2rem, 4vw, 3rem);">
     Full CarPlay integration. Control the queue and see what's playing, all from your car's display.
@@ -782,6 +1126,10 @@ section {
       <img src="assets/Screenshots/IMG_3585.PNG" alt="CarPlay Queue" loading="lazy">
     </div>
   </div>
+  <div class="lifestyle-card wide reveal" style="margin-top: clamp(2rem, 4vw, 3rem); max-width: 800px; margin-left: auto; margin-right: auto; aspect-ratio: 21/9; border-radius: 20px;">
+    <img src="assets/lifestyle-car.jpg" alt="Friends laughing in car" loading="lazy">
+    <span class="lifestyle-label">Music makes every drive better</span>
+  </div>
 </section>
 
 <!-- ============================================================
@@ -789,13 +1137,31 @@ section {
      ============================================================ -->
 <section class="perfect-for">
   <h2 class="section-heading reveal">Perfect For</h2>
-  <div class="tags-row stagger">
-    <span class="tag reveal">House Parties</span>
-    <span class="tag reveal">Weddings & Events</span>
-    <span class="tag reveal">Bars & Restaurants</span>
-    <span class="tag reveal">Road Trips</span>
-    <span class="tag reveal">Office Playlists</span>
-    <span class="tag reveal">Anywhere People Share Music</span>
+  <div class="lifestyle-grid stagger">
+    <div class="lifestyle-card wide reveal">
+      <img src="assets/lifestyle-houseparty.jpg" alt="Friends playing music at a house party" loading="lazy">
+      <span class="lifestyle-label">House Parties</span>
+    </div>
+    <div class="lifestyle-card reveal">
+      <img src="assets/lifestyle-wedding.jpg" alt="Friends toasting" loading="lazy">
+      <span class="lifestyle-label">Weddings & Events</span>
+    </div>
+    <div class="lifestyle-card reveal">
+      <img src="assets/lifestyle-party-3.jpg" alt="Friends at a bar" loading="lazy">
+      <span class="lifestyle-label">Bars & Restaurants</span>
+    </div>
+    <div class="lifestyle-card reveal">
+      <img src="assets/lifestyle-roadtrip-1.jpg" alt="Friends laughing in car" loading="lazy">
+      <span class="lifestyle-label">Road Trips</span>
+    </div>
+    <div class="lifestyle-card wide reveal">
+      <img src="assets/lifestyle-bar.jpg" alt="Club atmosphere" loading="lazy">
+      <span class="lifestyle-label">Anywhere People Share Music</span>
+    </div>
+    <div class="lifestyle-card reveal">
+      <img src="assets/lifestyle-houseparty2.jpg" alt="Friends dancing at house party" loading="lazy">
+      <span class="lifestyle-label">Get-Togethers</span>
+    </div>
   </div>
 </section>
 
@@ -832,8 +1198,32 @@ section {
      8. FOOTER
      ============================================================ -->
 <footer class="site-footer">
-  <img src="assets/icon.png" alt="Jukebox" class="footer-icon reveal">
-  <p class="footer-cta reveal">Download on the App Store</p>
+  <img src="assets/icon-appstore.jpg" alt="Jukebox" class="footer-icon reveal">
+  <p class="footer-cta reveal">Available Now</p>
+  <div class="store-badges reveal">
+    <a href="https://apps.apple.com/us/app/jukebox-party-playlist/id6757018633" class="store-badge" aria-label="Download on the App Store" target="_blank">
+      <svg width="150" height="50" viewBox="0 0 120 40" fill="none">
+        <rect width="120" height="40" rx="6" fill="#000"/>
+        <rect x="0.5" y="0.5" width="119" height="39" rx="5.5" stroke="#A6A6A6" stroke-opacity="0.5"/>
+        <path d="M24.77 20.3a4.95 4.95 0 0 1 2.36-4.15 5.07 5.07 0 0 0-3.99-2.16c-1.68-.18-3.31 1.01-4.17 1.01-.87 0-2.19-.99-3.61-.96a5.31 5.31 0 0 0-4.47 2.73c-1.93 3.34-.49 8.27 1.36 10.97.93 1.33 2.02 2.82 3.44 2.76 1.39-.06 1.91-.89 3.59-.89 1.67 0 2.15.89 3.6.86 1.49-.02 2.43-1.33 3.33-2.67a11.1 11.1 0 0 0 1.51-3.11 4.78 4.78 0 0 1-2.95-4.39ZM22.04 12.21a4.87 4.87 0 0 0 1.12-3.49 4.96 4.96 0 0 0-3.21 1.66 4.64 4.64 0 0 0-1.15 3.36 4.1 4.1 0 0 0 3.24-1.53Z" fill="#fff"/>
+        <text x="40" y="15" fill="#fff" font-family="system-ui,-apple-system,sans-serif" font-size="8" letter-spacing="0.03em">Download on the</text>
+        <text x="40" y="28" fill="#fff" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600" letter-spacing="-0.01em">App Store</text>
+      </svg>
+    </a>
+    <span class="store-badge store-badge-disabled" aria-label="Coming soon to Google Play">
+      <svg width="150" height="50" viewBox="0 0 135 40" fill="none">
+        <rect width="135" height="40" rx="6" fill="#1a1a1a"/>
+        <rect x="0.5" y="0.5" width="134" height="39" rx="5.5" stroke="#333"/>
+        <path d="M11.54 7.5 24.1 20l-12.56 12.5c-.35-.37-.54-.88-.54-1.44V8.94c0-.56.19-1.07.54-1.44Z" fill="#555"/><path d="M28.28 16.06 24.1 20l4.18 3.94 4.72-2.68c.8-.45.8-1.58 0-2.04l-4.72-2.68v-.48Z" fill="#555"/><path d="M24.1 20 11.54 32.5c.58.62 1.53.72 2.23.33l15.23-8.63L24.1 20Z" fill="#444"/><path d="M24.1 20 29 15.8 13.77 7.17c-.7-.39-1.65-.29-2.23.33L24.1 20Z" fill="#666"/>
+        <text x="42" y="14" fill="#666" font-family="system-ui,-apple-system,sans-serif" font-size="7.5" letter-spacing="0.05em">COMING SOON ON</text>
+        <text x="42" y="28" fill="#666" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600" letter-spacing="-0.01em">Google Play</text>
+      </svg>
+    </span>
+  </div>
+  <div class="qr-section reveal">
+    <img src="assets/qr-code.png" alt="Scan to download Jukebox" class="qr-code">
+    <p class="qr-label">Scan to download</p>
+  </div>
   <p class="footer-note reveal">
     Jukebox requires an Apple Music or Spotify subscription for the host. Guests can join and vote for free.
   </p>
