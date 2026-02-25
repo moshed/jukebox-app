@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jukebox — Slides</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@700,800,900&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   PRINT-READY SLIDES
+   Mirrors the animated Jukebox presentation
+   but structured for clean Cmd+P → PDF export.
+   Each .page = one printed landscape page.
+   =========================================== */
+
+@page {
+  size: 11in 8.5in landscape;
+  margin: 0;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
+}
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface-light: #1a1a24;
+  --text: #f0f0f5;
+  --text-muted: #8888a0;
+  --accent-purple: #8B5CF6;
+  --accent-pink: #EC4899;
+  --gradient: linear-gradient(135deg, #8B5CF6, #EC4899);
+  --gradient-text: linear-gradient(135deg, #8B5CF6, #EC4899);
+  --font-display: 'Cabinet Grotesk', sans-serif;
+  --font-body: 'General Sans', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--font-body);
+  background: #333;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===========================================
+   PAGE CONTAINER
+   =========================================== */
+.page {
+  width: 11in;
+  height: 8.5in;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  page-break-after: always;
+  break-after: page;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  background: var(--bg);
+}
+
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+/* Gradient mesh removed — print engines distort radial
+   gradients into solid color blobs. The dark bg is enough. */
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================================
+   ON-SCREEN PREVIEW
+   =========================================== */
+@media screen {
+  body {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .page {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    border-radius: 4px;
+  }
+}
+
+/* ===========================================
+   SHARED TYPOGRAPHY
+   =========================================== */
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.25rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ===========================================
+   PHONE FRAME
+   =========================================== */
+.phone-frame {
+  background: #1a1a1f;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.phone-frame img {
+  border-radius: 16px;
+  width: 100%;
+  display: block;
+}
+
+/* Car screen frame */
+.car-screen {
+  background: #111118;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.car-screen img {
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+}
+
+/* ===========================================
+   PAGE 1: HERO
+   =========================================== */
+.page-hero {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 3rem;
+}
+
+.page-hero .app-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 22%;
+  box-shadow:
+    0 8px 32px rgba(139, 92, 246, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1rem;
+}
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 4.5rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 0%, #d4d4e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.35rem;
+}
+
+.page-hero .tagline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.6rem;
+}
+
+.page-hero .description {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 0.9rem;
+}
+
+.page-hero .badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.badge {
+  background: var(--surface-light);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.hero-phones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: -10px;
+}
+
+.hero-phones .phone-frame {
+  width: 140px;
+}
+
+.hero-phones .phone-frame:nth-child(1) {
+  transform: translateY(12px) rotate(-3deg);
+  z-index: 1;
+}
+
+.hero-phones .phone-frame:nth-child(2) {
+  transform: scale(1.06);
+  z-index: 2;
+}
+
+.hero-phones .phone-frame:nth-child(3) {
+  transform: translateY(12px) rotate(3deg);
+  z-index: 1;
+}
+
+/* ===========================================
+   PAGE 2: HOW IT WORKS
+   =========================================== */
+.page-how {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.75rem 2.5rem;
+}
+
+.page-how .section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.step-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 1.25rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-number {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2.5rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.step-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.step-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+  flex: 1;
+}
+
+.step-card .phone-frame {
+  width: 130px;
+  align-self: center;
+}
+
+/* ===========================================
+   PAGE 3: FEATURES
+   =========================================== */
+.page-features {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.75rem 2.5rem;
+}
+
+.page-features .section-heading {
+  margin-bottom: 1.25rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+}
+
+.feature-item {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.feature-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--gradient);
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-indicator::after {
+  content: '';
+  width: 11px;
+  height: 11px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 3px;
+}
+
+.feature-indicator.circle::after { border-radius: 50%; }
+.feature-indicator.diamond::after { transform: rotate(45deg); border-radius: 2px; width: 9px; height: 9px; }
+.feature-indicator.bar::after { width: 13px; height: 5px; border-radius: 3px; }
+.feature-indicator.ring::after { background: transparent; border: 2px solid rgba(255,255,255,0.9); border-radius: 50%; width: 13px; height: 13px; }
+.feature-indicator.triangle::after { background: transparent; border-left: 6px solid rgba(255,255,255,0.9); border-top: 5px solid transparent; border-bottom: 5px solid transparent; width: 0; height: 0; border-radius: 0; margin-left: 2px; }
+.feature-indicator.dots::after { width: 13px; height: 3px; border-radius: 2px; box-shadow: 0 5px 0 rgba(255,255,255,0.9); }
+
+.feature-badge-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
+  object-fit: contain;
+}
+
+.feature-badge-icon.airplay-icon {
+  filter: invert(1);
+  border-radius: 6px;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.feature-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ===========================================
+   PAGE 4: SYNCED LYRICS
+   =========================================== */
+.page-lyrics {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 3rem;
+}
+
+.page-lyrics .section-heading {
+  margin-bottom: 0.5rem;
+}
+
+.page-lyrics .section-subtitle {
+  max-width: 520px;
+  margin-bottom: 1.5rem;
+}
+
+.lyrics-showcase {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.lyrics-phone-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lyrics-phone-wrapper .phone-frame {
+  width: 150px;
+}
+
+.lyrics-phone-wrapper.featured .phone-frame {
+  width: 180px;
+}
+
+.lyrics-caption {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ===========================================
+   PAGE 5: SONG REQUESTS
+   =========================================== */
+.page-requests {
+  display: flex;
+}
+
+.page-requests .text-panel {
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 3rem;
+}
+
+.page-requests .image-panel {
+  flex: 0 0 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(255,255,255,0.02);
+}
+
+.page-requests .image-panel .phone-frame {
+  width: 200px;
+}
+
+.page-requests .section-heading {
+  margin-bottom: 0.75rem;
+}
+
+.page-requests .section-subtitle {
+  margin-bottom: 1.25rem;
+  max-width: 440px;
+}
+
+.requests-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.requests-features li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-left: 1.1rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.requests-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gradient);
+}
+
+/* ===========================================
+   PAGE 6: ADAPTIVE THEMING
+   =========================================== */
+.page-theming {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 3rem;
+}
+
+.page-theming .section-heading {
+  margin-bottom: 0.5rem;
+}
+
+.page-theming .section-subtitle {
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+}
+
+.theming-phones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Colored glow behind each phone */
+.theming-phone-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.theming-phone-wrapper .glow {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.glow-red { background: #ef4444; }
+.glow-pink { background: #ec4899; }
+.glow-teal { background: #14b8a6; }
+
+.theming-phone-wrapper .phone-frame {
+  width: 160px;
+  position: relative;
+  z-index: 1;
+}
+
+.theming-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ===========================================
+   PAGE 7: CARPLAY
+   =========================================== */
+.page-carplay {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 3rem;
+}
+
+.platform-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  padding: 0.3rem 0.85rem 0.3rem 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.platform-badge-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.page-carplay .section-heading {
+  margin-bottom: 0.5rem;
+}
+
+.page-carplay .section-subtitle {
+  max-width: 480px;
+  margin-bottom: 1.25rem;
+}
+
+.carplay-display {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.carplay-display .car-screen {
+  max-width: 340px;
+}
+
+.car-lifestyle {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 21/9;
+}
+
+.car-lifestyle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.car-lifestyle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,15,0.85) 0%, rgba(10,10,15,0.1) 60%);
+}
+
+.car-lifestyle span {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  z-index: 1;
+}
+
+/* ===========================================
+   PAGE 8: PERFECT FOR
+   =========================================== */
+.page-perfect {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.75rem 2.5rem;
+}
+
+.page-perfect .section-heading {
+  margin-bottom: 1.25rem;
+}
+
+.lifestyle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  width: 100%;
+  height: 5.5in;
+}
+
+.lifestyle-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.lifestyle-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lifestyle-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,15,0.85) 0%, rgba(10,10,15,0.1) 60%);
+}
+
+.lifestyle-label {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #fff;
+  z-index: 1;
+}
+
+.lifestyle-card.wide {
+  grid-column: span 2;
+}
+
+/* ===========================================
+   PAGE 9: BUILT FOR EVERYONE
+   =========================================== */
+.page-built {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 3rem;
+}
+
+.page-built .section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 750px;
+  text-align: left;
+}
+
+.column-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.column-card h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.column-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.column-card li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.55;
+}
+
+.column-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gradient);
+}
+
+/* ===========================================
+   PAGE 10: DOWNLOAD / FOOTER
+   =========================================== */
+.page-footer {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 3rem;
+  border-top: none;
+}
+
+.page-footer .app-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 22%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.page-footer .cta {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.store-badges {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.store-badge {
+  display: inline-block;
+}
+
+.store-badge svg {
+  display: block;
+}
+
+.page-footer .qr-code {
+  width: 140px;
+  height: 140px;
+  border-radius: 10px;
+  margin-bottom: 0.4rem;
+}
+
+.page-footer .qr-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.page-footer .note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 450px;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1: HERO ===== -->
+<div class="page page-hero">
+  <img src="assets/icon-appstore.jpg" alt="Jukebox App Icon" class="app-icon">
+  <h1>Jukebox</h1>
+  <p class="tagline">Your guests pick the music.</p>
+  <p class="description">
+    Host a session from your Apple Music or Spotify library, share a code, and let everyone vote on what plays next. The most popular songs rise to the top&nbsp;&mdash; it's democratic party music.
+  </p>
+  <div class="badges">
+    <span class="badge"><img src="assets/apple-music-icon.jpg" alt="Apple Music" class="badge-icon">Apple Music</span>
+    <span class="badge"><img src="assets/spotify-icon.jpg" alt="Spotify" class="badge-icon">Spotify</span>
+  </div>
+  <div class="hero-phones">
+    <div class="phone-frame">
+      <img src="assets/Screenshots/IMG_2907.PNG" alt="Now Playing view">
+    </div>
+    <div class="phone-frame">
+      <img src="assets/Screenshots/IMG_2905.PNG" alt="Queue with votes">
+    </div>
+    <div class="phone-frame">
+      <img src="assets/Screenshots/IMG_2908.PNG" alt="Lyrics view">
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: HOW IT WORKS ===== -->
+<div class="page page-how">
+  <h2 class="section-heading">How It Works</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <span class="step-number">1</span>
+      <h3 class="step-title">Host a Session</h3>
+      <p class="step-desc">Pick any playlist from your Apple Music or Spotify library. Jukebox generates a unique code your guests can use to join. Share it as a QR code, link, or just tell them the number.</p>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_3588.PNG" alt="Share Session QR code">
+      </div>
+    </div>
+    <div class="step-card">
+      <span class="step-number">2</span>
+      <h3 class="step-title">Guests Vote</h3>
+      <p class="step-desc">Everyone gets votes to spend on songs they want to hear. The more votes a song gets, the higher it climbs in the queue. When a song plays, votes are returned&nbsp;&mdash; so keep voting!</p>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2905.PNG" alt="Queue with votes">
+      </div>
+    </div>
+    <div class="step-card">
+      <span class="step-number">3</span>
+      <h3 class="step-title">The Best Songs Win</h3>
+      <p class="step-desc">No more arguments about what to play next. The crowd decides. Songs with the most votes automatically play first.</p>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_3591.PNG" alt="Now Playing">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 3: FEATURES ===== -->
+<div class="page page-features">
+  <h2 class="section-heading">Features</h2>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-indicator circle"></div>
+      <h3 class="feature-title">Real-Time Voting</h3>
+      <p class="feature-desc">The crowd picks what plays next. Votes update instantly across all devices.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-indicator diamond"></div>
+      <h3 class="feature-title">Song Requests</h3>
+      <p class="feature-desc">Guests can search the full catalog and request songs. Hosts approve or auto-approve. Built-in explicit content filtering keeps it clean when needed.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-indicator bar"></div>
+      <h3 class="feature-title">Democratic Skip</h3>
+      <p class="feature-desc">Let guests vote to skip a song. If enough people agree, it moves on.</p>
+    </div>
+    <div class="feature-item">
+      <img src="assets/carplay-badge.svg" alt="CarPlay" class="feature-badge-icon">
+      <h3 class="feature-title">CarPlay &amp; Android Auto</h3>
+      <p class="feature-desc">Full CarPlay and Android Auto integration makes Jukebox perfect for road trips.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-indicator ring"></div>
+      <h3 class="feature-title">Time-Synced Lyrics</h3>
+      <p class="feature-desc">Beautiful lyric display with swipe-to-seek. Every word, perfectly timed.</p>
+    </div>
+    <div class="feature-item">
+      <img src="assets/airplay-icon.svg" alt="AirPlay" class="feature-badge-icon airplay-icon">
+      <h3 class="feature-title">AirPlay Support</h3>
+      <p class="feature-desc">Stream to any AirPlay speaker or TV. Fill the room with the party's choices.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-indicator dots"></div>
+      <h3 class="feature-title">Explicit Content Filter</h3>
+      <p class="feature-desc">Toggle explicit song filtering on or off. Keep the playlist family-friendly for any venue.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 4: SYNCED LYRICS ===== -->
+<div class="page page-lyrics">
+  <h2 class="section-heading">Every Word, Perfectly Timed</h2>
+  <p class="section-subtitle">Time-synced lyrics scroll in real time as the song plays. Swipe through lyrics to seek to any part of the song. Works with Apple Music and Spotify.</p>
+  <div class="lyrics-showcase">
+    <div class="lyrics-phone-wrapper">
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2908.PNG" alt="Synced lyrics — K-Pop with Korean and English">
+      </div>
+      <p class="lyrics-caption">Multilingual lyrics support</p>
+    </div>
+    <div class="lyrics-phone-wrapper featured">
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2913.PNG" alt="Synced lyrics — My Immortal, Evanescence">
+      </div>
+      <p class="lyrics-caption">Swipe to seek through lyrics</p>
+    </div>
+    <div class="lyrics-phone-wrapper">
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_3591.PNG" alt="Now Playing with synced lyrics">
+      </div>
+      <p class="lyrics-caption">Adaptive color theming</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 5: SONG REQUESTS ===== -->
+<div class="page page-requests">
+  <div class="text-panel">
+    <h2 class="section-heading">Song Requests</h2>
+    <p class="section-subtitle">Guests can search the full Apple Music or Spotify catalog and request songs to add to the queue. Hosts approve or auto-approve requests with a tap.</p>
+    <ul class="requests-features">
+      <li>Search millions of songs</li>
+      <li>Host approval or auto-approve</li>
+      <li>Explicit content filtering</li>
+      <li>Duplicate request prevention</li>
+    </ul>
+  </div>
+  <div class="image-panel">
+    <div class="phone-frame">
+      <img src="assets/Screenshots/IMG_3604.PNG" alt="Pending song requests with approve and reject">
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 6: ADAPTIVE THEMING ===== -->
+<div class="page page-theming">
+  <h2 class="section-heading">Colors That Move With the Music</h2>
+  <p class="section-subtitle">The app adapts its entire color scheme to match the album artwork. Every song feels like a new experience.</p>
+  <div class="theming-phones">
+    <div class="theming-phone-wrapper">
+      <div class="glow glow-red"></div>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_3591.PNG" alt="Red theme — Chappell Roan">
+      </div>
+    </div>
+    <div class="theming-phone-wrapper">
+      <div class="glow glow-pink"></div>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2908.PNG" alt="Pink theme — K-Pop lyrics">
+      </div>
+    </div>
+    <div class="theming-phone-wrapper">
+      <div class="glow glow-teal"></div>
+      <div class="phone-frame">
+        <img src="assets/Screenshots/IMG_2912.PNG" alt="Dark teal theme — Evanescence">
+      </div>
+    </div>
+  </div>
+  <p class="theming-note">Dark mode by default. 11 preset color options.</p>
+</div>
+
+<!-- ===== PAGE 7: CARPLAY ===== -->
+<div class="page page-carplay">
+  <div class="platform-badges">
+    <span class="platform-badge"><img src="assets/carplay-badge.svg" alt="CarPlay" class="platform-badge-icon">CarPlay</span>
+    <span class="platform-badge"><img src="assets/android-auto-icon.png" alt="Android Auto" class="platform-badge-icon">Android Auto</span>
+  </div>
+  <h2 class="section-heading">On the Road</h2>
+  <p class="section-subtitle">Full CarPlay integration. Control the queue and see what's playing, all from your car's display.</p>
+  <div class="carplay-display">
+    <div class="car-screen">
+      <img src="assets/Screenshots/IMG_3584.PNG" alt="CarPlay Now Playing">
+    </div>
+    <div class="car-screen">
+      <img src="assets/Screenshots/IMG_3585.PNG" alt="CarPlay Queue">
+    </div>
+  </div>
+  <div class="car-lifestyle">
+    <img src="assets/lifestyle-car.jpg" alt="Friends laughing in car">
+    <span>Music makes every drive better</span>
+  </div>
+</div>
+
+<!-- ===== PAGE 8: PERFECT FOR ===== -->
+<div class="page page-perfect">
+  <h2 class="section-heading">Perfect For</h2>
+  <div class="lifestyle-grid">
+    <div class="lifestyle-card wide">
+      <img src="assets/lifestyle-houseparty.jpg" alt="Friends playing music at a house party">
+      <span class="lifestyle-label">House Parties</span>
+    </div>
+    <div class="lifestyle-card">
+      <img src="assets/lifestyle-wedding.jpg" alt="Friends toasting">
+      <span class="lifestyle-label">Weddings & Events</span>
+    </div>
+    <div class="lifestyle-card">
+      <img src="assets/lifestyle-party-3.jpg" alt="Friends at a bar">
+      <span class="lifestyle-label">Bars & Restaurants</span>
+    </div>
+    <div class="lifestyle-card">
+      <img src="assets/lifestyle-roadtrip-1.jpg" alt="Friends laughing in car">
+      <span class="lifestyle-label">Road Trips</span>
+    </div>
+    <div class="lifestyle-card wide">
+      <img src="assets/lifestyle-bar.jpg" alt="Club atmosphere">
+      <span class="lifestyle-label">Anywhere People Share Music</span>
+    </div>
+    <div class="lifestyle-card">
+      <img src="assets/lifestyle-houseparty2.jpg" alt="Friends dancing at house party">
+      <span class="lifestyle-label">Get-Togethers</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 9: BUILT FOR EVERYONE ===== -->
+<div class="page page-built">
+  <h2 class="section-heading">Built for Everyone</h2>
+  <div class="two-columns">
+    <div class="column-card">
+      <h3>For Hosts</h3>
+      <ul>
+        <li>Pick any playlist from Apple Music or Spotify</li>
+        <li>Control playback and manage the queue</li>
+        <li>Approve or auto-approve song requests</li>
+        <li>Set PIN protection or location-based access</li>
+        <li>Remove disruptive users</li>
+      </ul>
+    </div>
+    <div class="column-card">
+      <h3>For Guests</h3>
+      <ul>
+        <li>Join with a code, QR scan, or link</li>
+        <li>Vote on songs and see real-time updates</li>
+        <li>Request songs from the full catalog</li>
+        <li>No music subscription needed</li>
+        <li>Discover nearby sessions</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 10: DOWNLOAD ===== -->
+<div class="page page-footer">
+  <img src="assets/icon-appstore.jpg" alt="Jukebox" class="app-icon">
+  <p class="cta">Available Now</p>
+  <div class="store-badges">
+    <a href="https://apps.apple.com/us/app/jukebox-party-playlist/id6757018633" class="store-badge" target="_blank">
+      <svg width="150" height="50" viewBox="0 0 120 40" fill="none">
+        <rect width="120" height="40" rx="6" fill="#000"/>
+        <rect x="0.5" y="0.5" width="119" height="39" rx="5.5" stroke="#A6A6A6" stroke-opacity="0.5"/>
+        <path d="M24.77 20.3a4.95 4.95 0 0 1 2.36-4.15 5.07 5.07 0 0 0-3.99-2.16c-1.68-.18-3.31 1.01-4.17 1.01-.87 0-2.19-.99-3.61-.96a5.31 5.31 0 0 0-4.47 2.73c-1.93 3.34-.49 8.27 1.36 10.97.93 1.33 2.02 2.82 3.44 2.76 1.39-.06 1.91-.89 3.59-.89 1.67 0 2.15.89 3.6.86 1.49-.02 2.43-1.33 3.33-2.67a11.1 11.1 0 0 0 1.51-3.11 4.78 4.78 0 0 1-2.95-4.39ZM22.04 12.21a4.87 4.87 0 0 0 1.12-3.49 4.96 4.96 0 0 0-3.21 1.66 4.64 4.64 0 0 0-1.15 3.36 4.1 4.1 0 0 0 3.24-1.53Z" fill="#fff"/>
+        <text x="40" y="15" fill="#fff" font-family="system-ui,-apple-system,sans-serif" font-size="8" letter-spacing="0.03em">Download on the</text>
+        <text x="40" y="28" fill="#fff" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600" letter-spacing="-0.01em">App Store</text>
+      </svg>
+    </a>
+    <span class="store-badge" style="opacity: 0.4; cursor: default;">
+      <svg width="150" height="50" viewBox="0 0 135 40" fill="none">
+        <rect width="135" height="40" rx="6" fill="#1a1a1a"/>
+        <rect x="0.5" y="0.5" width="134" height="39" rx="5.5" stroke="#333"/>
+        <path d="M11.54 7.5 24.1 20l-12.56 12.5c-.35-.37-.54-.88-.54-1.44V8.94c0-.56.19-1.07.54-1.44Z" fill="#555"/><path d="M28.28 16.06 24.1 20l4.18 3.94 4.72-2.68c.8-.45.8-1.58 0-2.04l-4.72-2.68v-.48Z" fill="#555"/><path d="M24.1 20 11.54 32.5c.58.62 1.53.72 2.23.33l15.23-8.63L24.1 20Z" fill="#444"/><path d="M24.1 20 29 15.8 13.77 7.17c-.7-.39-1.65-.29-2.23.33L24.1 20Z" fill="#666"/>
+        <text x="42" y="14" fill="#666" font-family="system-ui,-apple-system,sans-serif" font-size="7.5" letter-spacing="0.05em">COMING SOON ON</text>
+        <text x="42" y="28" fill="#666" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600" letter-spacing="-0.01em">Google Play</text>
+      </svg>
+    </span>
+  </div>
+  <div>
+    <img src="assets/qr-code.png" alt="Scan to download Jukebox" class="qr-code">
+    <p class="qr-label">Scan to download</p>
+  </div>
+  <p class="note">Jukebox requires an Apple Music or Spotify subscription for the host. Guests can join and vote for free.</p>
+</div>
+
+</body>
+</html>
